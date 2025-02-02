@@ -1,21 +1,20 @@
 import express from "express";
-import "dotenv/config";
+require("dotenv").config();
 import dbconnect from "./dbConnect.js";
 import { Book } from "./model/bookModel.js";
-import cors from "cors";
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT;
 
 //middleware
 app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    methods: ["GET", "PUT", "POST", "DELETE"],
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "PUT", "POST", "DELETE"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 const start = async () => {
   try {
     await dbconnect(process.env.MONGO_URL);
@@ -33,7 +32,6 @@ start();
 app.get("/page", (req, res) => {
   res.send("<h1>Welcome to Second Screen</h1>");
 });
-
 
 app.post("/pagedata", async (req, res) => {
   try {
