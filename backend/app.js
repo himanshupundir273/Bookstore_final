@@ -1,8 +1,8 @@
 import express from "express";
-require("dotenv").config();
+import "dotenv/config";
 import dbconnect from "./dbConnect.js";
 import { Book } from "./model/bookModel.js";
-const cors = require("cors");
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT;
