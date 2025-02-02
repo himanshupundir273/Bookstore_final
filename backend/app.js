@@ -10,11 +10,12 @@ const PORT = process.env.PORT;
 //middleware
 app.use(express.json());
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: "*", // Allow all origins for debugging
   methods: ["GET", "PUT", "POST", "DELETE"],
   credentials: true,
 };
-app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions)); // Handle preflight requests
 const start = async () => {
   try {
     await dbconnect(process.env.MONGO_URL);
