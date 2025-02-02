@@ -16,11 +16,7 @@ const AppBook = () => {
     try {
       const data = { title, author, year };
       setLoading(true);
-      const resp = await axios.post(`${backendDomain}/pagedata`,{
-        withCredentials: true,
-        credentials: "include", 
-
-      }, data);
+      const resp = await axios.post(`${backendDomain}/pagedata`, data);
       setLoading(false);
       console.log(data);
       enqueueSnackbar("Book Added Successfully", { variant: "success" });
